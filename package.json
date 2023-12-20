@@ -1,0 +1,21 @@
+{
+  "name": "custom-react-cards",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel --plugins @babel/plugin-transform-react-jsx src --out-dir dist --watch",
+    "build": "babel --plugins @babel/plugin-transform-react-jsx src --out-dir dist",
+    "deploy": "rsync -Prltz dist/ root@192.168.0.18:/root/homeassistant/www/custom-react-cards"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/preset-react": "^7.23.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-react-jsx-development": "^7.22.5"
+  }
+}
