@@ -1,5 +1,5 @@
-import "https://unpkg.com/react@18/umd/react.development.js";
-import "https://unpkg.com/react-dom@18/umd/react-dom.development.js";
+import * as React from 'react'
+import * as ReactDOM from 'react-dom/client'
 
 import StdCard from './components/StdCard.js';
 
@@ -7,11 +7,13 @@ import StdCard from './components/StdCard.js';
 
 const Station = props => {
   return (
-    <div />
+    <div>
+      {props.friendly_name}
+    </div>
   );
 };
 
-const Carburants = ({
+const Stations = ({
   hass: { states = {} },
   config = {},
 }) => {
@@ -30,18 +32,18 @@ const Carburants = ({
   );
 };
 
-class CardCarburants extends HTMLElement {
+class CardStations extends HTMLElement {
   set hass(hass) {
     // Whenever the state changes, a new `hass` object is set.
     if (!this.reactRoot) { this.reactRoot = ReactDOM.createRoot(this); }
-    this.reactRoot.render(<Carburants hass={hass} config={this.config} />);
+    this.reactRoot.render(<Stations hass={hass} config={this.config} />);
   }
 
   // The user supplied configuration.
   // Throw an exception and Home Assistant will render an error card.
   setConfig(config) {
     this.config = config;
-    this.reactRoot?.render(<Carburants hass={hass} config={config} />);
+    this.reactRoot?.render(<Stations hass={hass} config={config} />);
   }
 
   // The height of your card.
@@ -51,4 +53,4 @@ class CardCarburants extends HTMLElement {
   }
 }
 
-customElements.define("react-carburants", CardCarburants);
+customElements.define("react-stations", CardStations);

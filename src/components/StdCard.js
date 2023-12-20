@@ -1,3 +1,5 @@
+import React from 'react';
+
 const StdCard = ({ cardProps = {}, config = {}, ...props }) => (
   <ha-card
     header={config.title || 'Untitled'}

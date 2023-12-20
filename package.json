@@ -2,20 +2,25 @@
   "name": "custom-react-cards",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "babel --plugins @babel/plugin-transform-react-jsx src --out-dir dist --watch",
-    "build": "babel --plugins @babel/plugin-transform-react-jsx src --out-dir dist",
-    "deploy": "rsync -Prltz dist/ root@192.168.0.18:/root/homeassistant/www/custom-react-cards"
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "build": "esbuild \"src/*.js\" \"src/split/*.js\" --loader:.js=jsx --outdir=dist --platform=browser --splitting --format=esm --bundle --chunk-names=chunks/[name]-[hash]",
+    "postbuild": "rimraf dist/split",
+    "deploy": "rsync -Prltz --delete dist/ root@192.168.0.18:/root/homeassistant/www/custom-react-cards",
+    "bnd": "npm run build && npm run deploy"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/cli": "^7.23.4",
-    "@babel/preset-react": "^7.23.3"
+    "react": "^18.2.0",
+    "react-attr-converter": "^0.3.1",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@babel/plugin-transform-react-jsx-development": "^7.22.5"
+    "esbuild": "^0.19.10",
+    "rimraf": "^5.0.5"
   }
 }
