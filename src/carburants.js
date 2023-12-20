@@ -6,31 +6,30 @@ import StdCard from './components/StdCard.js';
 
 // https://github.com/home-assistant/frontend/tree/20231208.2/src/components
 
-const Station = props => {
+const Station = (props) => {
   return (
     <div>
-      {props.friendly_name}
+      <details>
+        <summary>
+          {props.entity_id}
+        </summary>
+        <pre>{JSON.stringify(props, null, 2)}</pre>
+      </details>
     </div>
   );
 };
 
-const Carburants = ({
-  hass: { states = {} } = {},
-  config = {},
-}) => {
-  const entities = config.entities.map(({ entity }) => states[entity]);
+const Carburants = ({ hass, config = {} }) => {
+  const entities = config.entities.map(({ entity }) => ({
+    entityState: hass?.states[entity],
+    entity,
+  }));
 
   return (
     <StdCard>
-      {entities.map(({ context: { id }, attributes }) => (
-        <Station {...attributes} key={id} />
+      {entities.map(({ entityState = {}, entity}) => (
+        <Station {...entityState} key={entity} />
       ))}
-
-      <details>
-        <pre>
-          {JSON.stringify(entities, null, 2)}
-        </pre>
-      </details>
     </StdCard>
   );
 };
