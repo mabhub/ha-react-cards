@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import attr2prop from 'react-attr-converter';
 
 // https://gist.github.com/thomasloven/1de8c62d691e754f95b023105fe4b74b

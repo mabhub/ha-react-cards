@@ -1,21 +1,11 @@
 import React from 'react';
+
 import ReactElement from './helpers/ReactElement.js';
+
 import HaCard from './components/HaCard.js';
+import Station from './components/Station.js';
 
 // https://github.com/home-assistant/frontend/tree/20231208.2/src/components
-
-const Station = (props) => {
-  return (
-    <div>
-      <details>
-        <summary>
-          {props.entity_id}
-        </summary>
-        <pre>{JSON.stringify(props, null, 2)}</pre>
-      </details>
-    </div>
-  );
-};
 
 const Carburants = ({ hass, config }) => {
   const entities = config.entities.map(({ entity }) => ({
