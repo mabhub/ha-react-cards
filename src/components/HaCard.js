@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StdCard = ({ cardProps = {}, config = {}, ...props }) => (
+const HaCard = ({ cardProps = {}, config = {}, ...props }) => (
   <ha-card
     header={config.title || 'Untitled'}
     {...cardProps}
@@ -9,4 +9,4 @@ const StdCard = ({ cardProps = {}, config = {}, ...props }) => (
   </ha-card>
 );
 
-export default StdCard;
+export default HaCard;
